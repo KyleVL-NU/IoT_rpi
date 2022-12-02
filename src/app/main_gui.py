@@ -7,7 +7,7 @@ from a remote sensor through a mqtt communication channel
 
 __author__ = "Kyle Vitautas Lopin"
 
-# libraries / modules / packages
+# standard libraries / modules / packages
 import tkinter
 
 # make a variable to change color
