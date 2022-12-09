@@ -8,41 +8,51 @@ from a remote sensor through a mqtt communication channel
 __author__ = "Kyle Vitautas Lopin"
 
 # standard libraries / modules / packages
-import tkinter
+import tkinter as tk
 
-# make a variable to change color
-color = 'red'  # = assignment; assign 'red' to color
 
-# make a python function to print "Hello World"
-# def - define
-def hello_world():
-    # make it go green -> yellow -> red
-    global color
-    print("Hello World")
-    if color == 'red':  # == is a comparison
-        color = 'green'
-    # if (color == 'green') {  arduino like
-    # code in here;
-    # }
-    elif color == 'green':  # else if
-        color = 'red'
-    canvas.itemconfig(circle, fill=color)
+class StatusButton:
+    """ Display the status using a canvas
 
-app = tkinter.Tk()  # application a class of tkinter.Tk
+    Attributes:
+        circle: object used to display the status
+        canvas (tk.Canvas): canvas the circle is in
+        color (str): color the circle will show
+
+    """
+    def __init__(self, parent):
+        self.color = 'red'
+        self.canvas = tk.Canvas(parent, width=120, height=120)
+        self.circle = self.canvas.create_oval(10, 10, 110, 110,
+                                              fill=self.color)
+        self.canvas.pack()
+
+    def toggle_color(self):
+        """ Toggle the color between red and green """
+        if self.color == 'red':
+            self.color = 'green'
+        elif self.color == 'green':
+            self.color = 'red'
+        self.canvas.itemconfig(self.circle, fill=self.color)
+
+
+app = tk.Tk()  # application a class of tkinter.Tk
 # geometry is a method of the tkinter.Tk class that
 # sets the size of the app window.  It takes a
 # string as an argument.
 app.geometry("400x400")
-canvas = tkinter.Canvas(app, width=120, height=120)
-circle = canvas.create_oval(10, 10, 110, 110,
-                            fill=color)
-canvas.pack()
+status_btn = StatusButton(app)
+print(status_btn)
+status_btn2 = StatusButton(app)
+print(status_btn2)
 
 # make a button [tkinter class] and put it in the app
 # Button takes 3 arguments, app-where to put the button
 # text - key word argument
-tkinter.Button(app, text="Hello World",
-               command=hello_world).pack()
+tk.Button(app, text="Toggle Circle 1",
+          command=status_btn.toggle_color).pack()
+tk.Button(app, text="Toggle Circle 2",
+          command=status_btn2.toggle_color).pack()
 
 app.mainloop()  # mainloop is method of tkinter.Tk
 # methods are functions of classes
