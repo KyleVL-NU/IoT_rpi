@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright (c) 2022 Kyle Lopin <kylel@nu.ac.th>
 
 """ Document string (Doc String)
@@ -71,8 +72,9 @@ class SensorUI(tk.Tk):
             name (str): name of the button to change
             _running (bool): If the state is on (True) or off (False)
         """
-        index = NAMES.index(name)  # ดัชนี
-        self.status_buttons[index].toggle_color(_running)
+        if name in NAMES:  # if name is not applicable, return
+            index = NAMES.index(name)
+            self.status_buttons[index].toggle_color(_running)
 
 
 class StatusButton(tk.Frame):
