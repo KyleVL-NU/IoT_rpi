@@ -8,9 +8,7 @@ Wrap a matplotlib pyplot in a tkinter frame
 __author__ = "Kyle Vitautas Lopin"
 
 # standard libraries
-from dataclasses import dataclass
-from datetime import datetime, timedelta
-import random
+from datetime import timedelta
 import tkinter as tk
 
 # installed libraries
@@ -59,38 +57,3 @@ class Display(tk.Frame):
                             now + timedelta(minutes=5)])
         self.axis.set_ylim([0, 40])
         self.canvas.draw()
-
-
-@dataclass
-class SensorData:
-    """
-    Data class to hold 1 sensors time series data
-
-    Attributes:
-        time (list[datetime]): time stamps of when teh sensor read data
-        temperature (list[floats]): sensor data
-        display (Display): child that will display the data of this class
-    """
-    time = []
-    temperature = []
-
-    def __init__(self, _parent: tk.Tk):
-        self.display = Display(_parent)
-        self.display.pack()
-
-    def add_data(self):
-        """
-        Append new received data from a sensor and add it to the existing data.
-        Call the Display child to update the user's view of the data
-        """
-        self.time.append(datetime.now())
-        self.temperature.append(random.randrange(20, 35))
-        self.display.update_line(self.time, self.temperature)
-
-
-if __name__ == '__main__':
-    parent = tk.Tk()  # main_gui
-    sensor_data = SensorData(parent)
-    tk.Button(parent, text="Update data",
-              command=sensor_data.add_data).pack()
-    parent.mainloop()
