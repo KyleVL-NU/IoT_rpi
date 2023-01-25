@@ -34,6 +34,17 @@ class TestSensorData(unittest.TestCase):
         self.assertEqual([now, now2], sensor_class.time)
         self.assertEqual([5, 10], sensor_class.temperature)
 
+    def test_display_update_line_called(self):
+        """ Test that the update_line method is called correctly.
+         Use the test_sensor_ui code for an example """
+        sensor_class = sensor_data.SensorData(None)
+        print(sensor_class)
+        # add 1 data point and check it is added correctly
+        now = datetime(2023, 1, 24, 10, 50, 12)
+        sensor_class.add_data(now, 5)
+        # check that the self.display.update_line is called with the
+        # correct arguments
+
 
 if __name__ == '__main__':
     unittest.main()
