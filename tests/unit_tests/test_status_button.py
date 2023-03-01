@@ -12,8 +12,8 @@ import sys
 import unittest
 # print(os.getcwd())
 # print(os.path.abspath(os.path.join("..", "..", "src", "app")))
+
 sys.path.append(os.path.join("..", "..", "src", "app"))
-# print(sys.path)
 # # local files
 from src.app import main_gui
 
